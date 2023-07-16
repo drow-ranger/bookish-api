@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   NotFoundException,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
@@ -39,8 +40,8 @@ export class BooksController {
 
   @Get(':id')
   @ApiOkResponse({ type: BookEntity })
-  async findOne(@Param('id') id: string) {
-    const book = await this.booksService.findOne(+id);
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    const book = await this.booksService.findOne(id);
 
     if (!book) {
       throw new NotFoundException(`Could not find book with ${id}.`);
@@ -50,13 +51,16 @@ export class BooksController {
 
   @Patch(':id')
   @ApiOkResponse({ type: BookEntity })
-  update(@Param('id') id: string, @Body() updateBookDto: UpdateBookDto) {
-    return this.booksService.update(+id, updateBookDto);
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateBookDto: UpdateBookDto,
+  ) {
+    return this.booksService.update(id, updateBookDto);
   }
 
   @Delete(':id')
   @ApiOkResponse({ type: BookEntity })
-  remove(@Param('id') id: string) {
-    return this.booksService.remove(+id);
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.booksService.remove(id);
   }
 }
