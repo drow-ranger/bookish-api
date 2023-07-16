@@ -8,15 +8,18 @@ import {
   Delete,
   NotFoundException,
   ParseIntPipe,
+  UseFilters,
 } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { BookEntity } from './entities/book.entity';
+import { PrismaClientExceptionFilter } from '@app/shared/prisma-client-exception/prisma-client-exception.filter';
 
 @Controller('books')
 @ApiTags('books')
+@UseFilters(PrismaClientExceptionFilter)
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
