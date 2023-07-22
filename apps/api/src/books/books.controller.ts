@@ -15,7 +15,7 @@ import { CreateBookDto } from './dto/create-book.dto';
 import { UpdateBookDto } from './dto/update-book.dto';
 import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { BookEntity } from './entities/book.entity';
-import { PrismaClientExceptionFilter } from '@app/shared/prisma-client-exception/prisma-client-exception.filter';
+import { PrismaClientExceptionFilter } from '@app/shared';
 
 @Controller('books')
 @ApiTags('books')

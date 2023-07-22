@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { BooksService } from './books.service';
 import { BooksController } from './books.controller';
-import { PrismaModule } from '@app/shared/prisma/prisma.module';
+import { PrismaModule } from '@app/shared';
 
 @Module({
   controllers: [BooksController],
